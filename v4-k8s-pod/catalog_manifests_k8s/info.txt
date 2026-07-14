@@ -1,0 +1,23 @@
+===================================================================
+ENDPOINTS
+===================================================================
+      "/topology"
+    "/catalog/products"
+     "/catalog/products/a1258cd2-176c-4507-ade6-746dab5ad625"
+     "/catalog/size"
+     "/catalog/tags"
+
+
+
+===================================================================
+CMD
+===================================================================
+
+
+
+ "aws eks --region eu-west-3 update-kubeconfig --name retail-dev-eksdemo1" 
+ 1782  kubectl describe pod catalog-pod
+ 1783  kubectl port-forward pod/catalog-pod 7080:8080 
+ 1784  kubectl logs -f catalog-pod
+ 1785  kubectl exec -it catalog-pod --sh
+
