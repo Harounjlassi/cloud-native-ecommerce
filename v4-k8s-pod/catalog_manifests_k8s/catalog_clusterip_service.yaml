@@ -4,10 +4,16 @@ metadata:
   name: catalog-service
   labels:
     app.kubernetes.io/name: catalog
+    app.kubernetes.io/instance: catalog
+    app.kubernetes.io/component: service
+    app.kubernetes.io/owner: retail-store-sample    
 spec:
   type: ClusterIP
   selector:
     app.kubernetes.io/name: catalog
+    app.kubernetes.io/instance: catalog
+    app.kubernetes.io/component: service
+    app.kubernetes.io/owner: retail-store-sample    
   ports:
     - name: http
       port: 8080
