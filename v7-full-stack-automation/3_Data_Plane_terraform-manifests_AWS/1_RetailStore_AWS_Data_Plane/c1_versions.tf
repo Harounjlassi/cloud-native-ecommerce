@@ -29,5 +29,5 @@ provider "aws" {
 # Secondary provider specifically for Cart's DynamoDB table
 provider "aws" {
   alias  = "west2"
-  region = "eu-west-2"
+  region = "us-west-2"
 }
