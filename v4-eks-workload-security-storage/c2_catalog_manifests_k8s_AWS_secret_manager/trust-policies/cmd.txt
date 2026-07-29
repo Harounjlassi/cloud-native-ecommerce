@@ -1,0 +1,129 @@
+===================================================================
+ENDPOINTS
+===================================================================
+      "/topology"
+    "/catalog/products"
+     "/catalog/products/a1258cd2-176c-4507-ade6-746dab5ad625"
+     "/catalog/size"
+     "/catalog/tags"
+
+===================================================================
+CMD
+===================================================================
+
+ "aws eks --region eu-west-3 update-kubeconfig --name retail-dev-eksdemo1" 
+
+
+=================================
+instal helm 
+=================================
+sudo apt-get install curl gpg apt-transport-https --yes
+
+curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+
+echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+sudo apt-get update
+
+sudo apt-get install helm
+===============================
+
+
+# Add Helm Repositories
+helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+helm repo add aws-secrets-manager https://aws.github.io/secrets-store-csi-driver-provider-aws
+helm repo update
+
+# List Helm Repos
+helm repo list
+===================================================================
+
+# Install the Secrets Store CSI Driver in the kube-system namespace:
+
+helm install csi-secrets-store \
+  secrets-store-csi-driver/secrets-store-csi-driver \
+  --namespace kube-system \
+  --set tokenRequests[0].audience="pods.eks.amazonaws.com"
+
+# List all Helm releases across namespaces:
+
+helm list --all-namespaces
+
+# List releases only in the kube-system namespace:
+helm list -n kube-system
+
+# Verify installation status, pods, and resources created by the release:
+helm status csi-secrets-store -n kube-system
+
+
+# Verify pods:
+kubectl get pods -n kube-system -l app=secrets-store-csi-driver
+===================================================================
+# Install the AWS Secrets Manager CSI Driver Provider in the kube-system namespace.
+helm install secrets-provider-aws \
+  aws-secrets-manager/secrets-store-csi-driver-provider-aws \
+  --namespace kube-system \
+  --set secrets-store-csi-driver.install=false
+
+# List installed Helm Releases
+helm list -n kube-system
+
+# Inspect the AWS provider Helm release:
+helm status secrets-provider-aws -n kube-system
+===================================================================
+export AWS_REGION="eu-west-3"
+export EKS_CLUSTER_NAME="retail-dev-eksdemo1"
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+# Confirm values
+echo $AWS_REGION
+echo $EKS_CLUSTER_NAME
+echo $AWS_ACCOUNT
+===================================================================
+
+
+aws iam create-policy \
+  --policy-name catalog-db-secret-policy \
+  --policy-document file://catalog-db-secret-policy.json
+===================================================================
+# Create IAM Role
+aws iam create-role \
+  --role-name catalog-db-secrets-role \
+  --assume-role-policy-document file://trust-policy.json
+===================================================================
+# Attach the IAM policy to IAM Role
+aws iam attach-role-policy \
+  --role-name catalog-db-secrets-role \
+  --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/catalog-db-secret-policy
+===================================================================
+# List Attached Policies to IAM Role
+aws iam list-attached-role-policies --role-name catalog-db-secrets-role
+===================================================================
+aws eks list-addons --cluster-name ${EKS_CLUSTER_NAME}
+
+===================================================================
+
+# Create Pod Identity Association
+aws eks create-pod-identity-association \
+  --cluster-name ${EKS_CLUSTER_NAME} \
+  --namespace default \
+  --service-account catalog-mysql-sa \
+  --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/catalog-db-secrets-role
+
+
+===================================================================
+# List Pod Identity Associations
+aws eks list-pod-identity-associations --cluster-name ${EKS_CLUSTER_NAME}
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+===================================================================

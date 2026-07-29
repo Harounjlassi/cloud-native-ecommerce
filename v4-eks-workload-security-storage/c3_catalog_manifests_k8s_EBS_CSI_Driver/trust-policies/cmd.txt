@@ -1,0 +1,108 @@
+===================================================================
+ENDPOINTS
+===================================================================
+      "/topology"
+    "/catalog/products"
+     "/catalog/products/a1258cd2-176c-4507-ade6-746dab5ad625"
+     "/catalog/size"
+     "/catalog/tags"
+
+
+
+===================================================================
+CMD
+===================================================================
+
+
+
+ "aws eks --region eu-west-3 update-kubeconfig --name retail-dev-eksdemo1" 
+
+
+
+
+=================================
+instal helm 
+=================================
+sudo apt-get install curl gpg apt-transport-https --yes
+
+curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+
+echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+sudo apt-get update
+
+sudo apt-get install helm
+===============================
+
+
+===================================================================
+# Create IAM Role
+aws iam create-role \
+  --role-name AmazonEKS_EBS_CSI_DriverRole_${EKS_CLUSTER_NAME} \
+  --assume-role-policy-document file://ebs-csi-driver-trust-policy.json
+
+# Attach IAM Policy to IAM Role
+aws iam attach-role-policy \
+  --role-name AmazonEKS_EBS_CSI_DriverRole_${EKS_CLUSTER_NAME} \
+  --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+
+# Verify:
+aws iam list-attached-role-policies \
+  --role-name AmazonEKS_EBS_CSI_DriverRole_${EKS_CLUSTER_NAME}
+===================================================================
+# Create EKS Pod Identity Assocication
+aws eks create-pod-identity-association \
+  --cluster-name ${EKS_CLUSTER_NAME} \
+  --namespace kube-system \
+  --service-account ebs-csi-controller-sa \
+  --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole_${EKS_CLUSTER_NAME}
+  
+  
+===================================================================
+
+# List existing EKS add-ons
+aws eks list-addons --cluster-name ${EKS_CLUSTER_NAME}
+
+# Install EKS EBS CSI Addon
+aws eks create-addon \
+  --cluster-name ${EKS_CLUSTER_NAME} \
+  --addon-name aws-ebs-csi-driver \
+  --service-account-role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole_${EKS_CLUSTER_NAME}
+===================================================================
+# List EKS add-ons (after install)
+aws eks list-addons --cluster-name ${EKS_CLUSTER_NAME}
+
+# Describe Addon - Verify Status
+aws eks describe-addon \
+  --cluster-name ${EKS_CLUSTER_NAME} \
+  --addon-name aws-ebs-csi-driver \
+  --query "addon.status" --output text
+===================================================================
+# MySQL Pod
+kubectl exec -it <mysql-pod-name> -- ls /mnt/secrets-store
+kubectl exec -it <mysql-pod-name> -- cat /mnt/secrets-store/MYSQL_USER
+kubectl exec -it <mysql-pod-name> -- cat /mnt/secrets-store/MYSQL_PASSWORD
+
+
+# Catalog Pod
+kubectl exec -it <catalog-pod-name> -- ls /mnt/secrets-store
+kubectl exec -it <catalog-pod-name> -- cat /mnt/secrets-store/MYSQL_USER
+kubectl exec -it <catalog-pod-name> -- cat /mnt/secrets-store/MYSQL_PASSWORD
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+
+==================================================================
+
+===================================================================
+===================================================================
+===================================================================
+===================================================================
+
+==================================================================
+
+
+
+
+
