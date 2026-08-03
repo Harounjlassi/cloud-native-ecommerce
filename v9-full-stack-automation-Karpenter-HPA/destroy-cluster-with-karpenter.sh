@@ -37,7 +37,7 @@ echo
 echo "==============================="
 echo "STEP-3: Delete Spot NodePool"
 echo "==============================="
-cd 04_KARPENTER_k8s-manifests
+cd 6_KARPENTER_k8s-manifests
 kubectl delete -f 03_nodepool_spot.yaml --ignore-not-found
 echo "✅ Spot NodePool deleted"
 
@@ -75,7 +75,7 @@ echo
 echo "==============================="
 echo "STEP-6: Destroy Karpenter Terraform"
 echo "==============================="
-cd ../03_KARPENTER_terraform-manifests
+cd ../6_KARPENTER_k8s-manifests
 terraform init
 terraform destroy -auto-approve
 rm -rf .terraform .terraform.lock.hcl
