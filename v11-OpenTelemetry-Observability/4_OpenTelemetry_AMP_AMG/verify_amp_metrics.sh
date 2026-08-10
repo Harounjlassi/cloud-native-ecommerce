@@ -11,7 +11,7 @@
 
 # Configuration - UPDATE THESE VALUES
 AMP_WORKSPACE_ID="ws-194b4e51-91dd-4803-881a-1290a1ca9eec"
-AWS_REGION="us-east-1"
+AWS_REGION="eu-west-3"
 AMP_ENDPOINT="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}"
 
 echo "============================================================================"

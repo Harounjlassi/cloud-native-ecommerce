@@ -32,7 +32,7 @@ spec:
         # Limit to smaller sizes only
         - key: karpenter.k8s.aws/instance-size
           operator: In
-          values: ["micro", "small", "medium", "large"]
+          values: ["small", "medium", "large"]
           #values: ["xlarge"]  # Caps at t3.medium (2 vCPU, 4GB RAM)
 
         # Must match the AZs where your EKS cluster has subnets configured

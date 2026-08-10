@@ -21,9 +21,9 @@ terraform {
 
   # Remote backend configuration using S3 
   backend "s3" {
-    bucket         = "tfstate-dev-us-east-1-jpjtof"         
+    bucket         = "tfstate-dev-eu-west-3-m8wjif"         
     key            = "opentelemetry/dev/terraform.tfstate"            
-    region         = "us-east-1"                            
+    region         = "eu-west-3"                            
     encrypt        = true                                   
     use_lockfile   = true     
   }
@@ -32,4 +32,8 @@ terraform {
 provider "aws" {
   # AWS region to use for all resources (from variables)
   region = var.aws_region
+}
+provider "aws" {
+  alias  = "grafana"
+  region = "eu-central-1"
 }

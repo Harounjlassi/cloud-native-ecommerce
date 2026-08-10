@@ -1,5 +1,7 @@
 # AMAZON MANAGED GRAFANA WORKSPACE
 resource "aws_grafana_workspace" "main" {
+  provider = aws.grafana
+
   name                     = "${local.cluster_name}-amg"
   description              = "Grafana workspace for ${local.cluster_name} EKS cluster monitoring"
   account_access_type      = "CURRENT_ACCOUNT"

@@ -12,9 +12,9 @@ terraform {
 
   # Remote backend configuration using S3 
   backend "s3" {
-    bucket         = "tfstate-dev-us-east-1-jpjtof"         
+    bucket         = "tfstate-dev-eu-west-3-m8wjif"         
     key            = "retail-persistent-endpoints/dev/terraform.tfstate"            
-    region         = "us-east-1"                            
+    region         = "eu-west-3"                            
     encrypt        = true                                   
     use_lockfile   = true     
   }
@@ -29,5 +29,5 @@ provider "aws" {
 # Secondary provider specifically for Cart's DynamoDB table
 provider "aws" {
   alias  = "west2"
-  region = "us-west-2"
+  region = "eu-west-3"
 }

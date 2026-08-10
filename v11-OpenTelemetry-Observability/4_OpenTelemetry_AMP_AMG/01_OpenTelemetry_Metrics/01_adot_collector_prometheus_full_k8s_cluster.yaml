@@ -20,7 +20,7 @@ spec:
     - name: CLUSTER_NAME
       value: "retail-dev-eksdemo1"  # UPDATE: Your EKS cluster name
     - name: AWS_REGION
-      value: "us-east-1"            # UPDATE: Your AWS region
+      value: "eu-west-3"            # UPDATE: Your AWS region
     - name: NODE_NAME  
       valueFrom:
         fieldRef:
@@ -379,7 +379,7 @@ spec:
         endpoint: 0.0.0.0:55679
 
       sigv4auth:
-        region: "us-east-1"
+        region: "eu-west-3"
         service: "aps"  
 
     # ====================

@@ -30,7 +30,7 @@ app:
       useSecretsManager: true  # Enable Secrets Manager
       secretsManager:
         secretName: "retailstore-db-secret-1"
-        region: "us-east-1"      
+        region: "eu-west-3"      
 
 # ----------------------------------------------------------------------------
 # RESOURCE MANAGEMENT
