@@ -18,7 +18,7 @@ mysql:
 app:
   persistence:
     provider: mysql
-    endpoint: "mydb3.cxojydmxwly6.us-east-1.rds.amazonaws.com"
+    endpoint: "mydb3.cn0gkeyiee3b.eu-west-3.rds.amazonaws.com"
     database: "catalogdb"
 
     secret:
@@ -30,7 +30,7 @@ app:
       useSecretsManager: true  # Enable Secrets Manager
       secretsManager:
         secretName: "retailstore-db-secret-1"
-        region: "us-east-1"      
+        region: "eu-west-3"      
 
 # ----------------------------------------------------------------------------
 # RESOURCE MANAGEMENT

@@ -20,7 +20,7 @@ postgresql:
 app:
   persistence:
     provider: postgres
-    endpoint: orders-postgres-db.cxojydmxwly6.us-east-1.rds.amazonaws.com:5432
+    endpoint: orders-postgres-db.cn0gkeyiee3b.eu-west-3.rds.amazonaws.com:5432
     database: ordersdb
 
     secret:
@@ -33,7 +33,7 @@ app:
       useSecretsManager: true  # Enable Secrets Manager
       secretsManager:
         secretName: "retailstore-db-secret-1"  # AWS Secrets Manager secret name
-        region: "us-east-1"  # AWS region
+        region: "eu-west-3"  # AWS region
 
   # ----------------------------------------------------------------------------
   # MESSAGING CONFIGURATION - AWS SQS

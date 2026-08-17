@@ -20,14 +20,14 @@ postgresql:
 app:
   persistence:
     provider: postgres
-    endpoint: orders-postgres-db.cxojydmxwly6.us-east-1.rds.amazonaws.com:5432
+    endpoint: orders-postgres-db.cn0gkeyiee3b.eu-west-3.rds.amazonaws.com:5432
     database: ordersdb
 
     secret:
       create: true
       name: orders-db
       username: mydbadmin
-      password: kalyandb101
+      password: haroun101
 
   # ----------------------------------------------------------------------------
   # MESSAGING CONFIGURATION

@@ -21,7 +21,7 @@ app:
   persistence:
     provider: redis
     redis:
-      endpoint: retail-dev-checkout-redis.lwndbu.0001.use1.cache.amazonaws.com:6379
+      endpoint: retail-dev-checkout-redis.im8mcl.0001.euw3.cache.amazonaws.com:6379
 
   endpoints:
     orders: http://orders  # Orders service endpoint (ClusterIP service name)
