@@ -338,7 +338,8 @@ spec:
 
       # Resource detection for AWS
       resourcedetection/eks:
-        detectors: [env, eks, ec2, system]
+        detectors: [env, ec2, system]
+        #detectors: [env, eks, ec2, system]
         timeout: 10s
         override: false
 
@@ -357,7 +358,7 @@ spec:
     # ====================
     exporters:
       prometheusremotewrite:
-        endpoint: "https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-194b4e51-91dd-4803-881a-1290a1ca9eec/api/v1/remote_write"
+        endpoint: "https://aps-workspaces.eu-west-3.amazonaws.com/workspaces/ws-0e6df71e-5173-4699-9d90-f8e2ec631ec0/api/v1/remote_write"
         auth:
           authenticator: sigv4auth
 
