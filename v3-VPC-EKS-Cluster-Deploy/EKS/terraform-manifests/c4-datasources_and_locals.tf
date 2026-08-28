@@ -1,7 +1,5 @@
-
 # Localvalues used throughout the EKS configuration
 # Helpss enforce naming consistency and REeduce duplication
-
 locals {
   # Business division or team name from variable
   owners = var.business_division  

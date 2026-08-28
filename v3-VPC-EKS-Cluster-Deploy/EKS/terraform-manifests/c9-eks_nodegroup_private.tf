@@ -58,7 +58,7 @@ resource "aws_eks_node_group" "private_nodes" {
     # Standard EC2 name tag
     Name = "${local.name}-private-ng"
 
-    # Logical environment (, dev, prod)
+    # Logical environment (dev, prod)
     Environment = var.environment_name
   })
 
