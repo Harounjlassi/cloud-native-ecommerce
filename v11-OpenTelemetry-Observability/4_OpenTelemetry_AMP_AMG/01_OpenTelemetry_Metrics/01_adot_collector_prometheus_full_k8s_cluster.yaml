@@ -358,7 +358,7 @@ spec:
     # ====================
     exporters:
       prometheusremotewrite:
-        endpoint: "https://aps-workspaces.eu-west-3.amazonaws.com/workspaces/ws-0e6df71e-5173-4699-9d90-f8e2ec631ec0/api/v1/remote_write"
+        endpoint: "https://aps-workspaces.eu-west-3.amazonaws.com/workspaces/ws-d9102943-5a5d-4a3f-b4e6-8c5dc1e4f2fc/api/v1/remote_write"
         auth:
           authenticator: sigv4auth
 
