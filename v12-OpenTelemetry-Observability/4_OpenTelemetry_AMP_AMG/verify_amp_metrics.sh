@@ -10,7 +10,7 @@
 ################################################################################
 
 # Configuration - UPDATE THESE VALUES
-AMP_WORKSPACE_ID="ws-d9102943-5a5d-4a3f-b4e6-8c5dc1e4f2fc"
+AMP_WORKSPACE_ID="ws-22150874-6aac-4313-ab00-6f422855b844"
 AWS_REGION="eu-west-3"
 AMP_ENDPOINT="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}"
 
