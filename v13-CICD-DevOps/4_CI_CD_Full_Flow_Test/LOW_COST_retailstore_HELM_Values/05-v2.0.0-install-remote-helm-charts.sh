@@ -13,7 +13,7 @@ echo "Adding Helm Repository..."
 echo "--------------------------------------------"
 
 # Add Helm repository
-helm repo add stacksimplify https://stacksimplify.github.io/helm-charts
+helm repo add stack https://stacksimplify.github.io/helm-charts
 helm repo update
 
 echo "✅ Helm repository added and updated"
@@ -29,7 +29,7 @@ echo
 echo "--------------------------------------------"
 echo "Step 1/5: Installing Catalog Service..."
 echo "--------------------------------------------"
-helm upgrade --install catalog stacksimplify/retail-store-sample-catalog-chart \
+helm upgrade --install catalog stack/retail-store-sample-catalog-chart \
   --version 2.0.0 \
   -f values-catalog-v2.0.0.yaml \
   --wait \
@@ -43,7 +43,7 @@ echo
 echo "--------------------------------------------"
 echo "Step 2/5: Installing Cart Service..."
 echo "--------------------------------------------"
-helm upgrade --install carts stacksimplify/retail-store-sample-cart-chart \
+helm upgrade --install carts stack/retail-store-sample-cart-chart \
   --version 1.0.0 \
   -f values-cart.yaml \
   --wait \
@@ -57,7 +57,7 @@ echo
 echo "--------------------------------------------"
 echo "Step 3/5: Installing Checkout Service..."
 echo "--------------------------------------------"
-helm upgrade --install checkout stacksimplify/retail-store-sample-checkout-chart \
+helm upgrade --install checkout stack/retail-store-sample-checkout-chart \
   --version 1.0.0 \
   -f values-checkout.yaml \
   --wait \
@@ -71,7 +71,7 @@ echo
 echo "--------------------------------------------"
 echo "Step 4/5: Installing Orders Service..."
 echo "--------------------------------------------"
-helm upgrade --install orders stacksimplify/retail-store-sample-orders-chart \
+helm upgrade --install orders stack/retail-store-sample-orders-chart \
   --version 2.0.0 \
   -f values-orders-v2.0.0.yaml \
   --wait \
@@ -86,7 +86,7 @@ echo "✅ UI service will be deployed using ArgoCD"
 #echo "--------------------------------------------"
 #echo "Step 5/5: Installing UI Service..."
 #echo "--------------------------------------------"
-#helm upgrade --install ui stacksimplify/retail-store-sample-ui-chart \
+#helm upgrade --install ui stack/retail-store-sample-ui-chart \
 #  --version 1.0.0 \
 #  -f values-ui.yaml \
 #  --wait \
